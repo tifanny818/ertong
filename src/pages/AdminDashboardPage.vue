@@ -156,7 +156,7 @@ async function saveItem() {
         break
       case 'growth':
         if (editingId.value) {
-          const r = await growthApi.updateRecord(editingId.value, growthForm.value)
+          const r = await growthApi.updateRecord(Number(editingId.value), growthForm.value)
           const idx = records.value.findIndex(x => x.id === r.id)
           if (idx !== -1) records.value[idx] = r
         } else {
@@ -165,7 +165,7 @@ async function saveItem() {
         break
       case 'milestone':
         if (editingId.value) {
-          const r = await milestoneApi.updateMilestone(editingId.value, milestoneForm.value)
+          const r = await milestoneApi.updateMilestone(Number(editingId.value), milestoneForm.value)
           const idx = milestones.value.findIndex(x => x.id === r.id)
           if (idx !== -1) milestones.value[idx] = r
         } else {
@@ -174,7 +174,7 @@ async function saveItem() {
         break
       case 'vaccine':
         if (editingId.value) {
-          const r = await vaccineApi.updateVaccine(editingId.value, vaccineForm.value)
+          const r = await vaccineApi.updateVaccine(Number(editingId.value), vaccineForm.value)
           const idx = vaccines.value.findIndex(x => x.id === r.id)
           if (idx !== -1) vaccines.value[idx] = r
         } else {
@@ -192,7 +192,7 @@ async function saveItem() {
         break
       case 'diary':
         if (editingId.value) {
-          const r = await diaryApi.updateDiary(editingId.value, diaryForm.value)
+          const r = await diaryApi.updateDiary(Number(editingId.value), diaryForm.value)
           const idx = diaries.value.findIndex(x => x.id === r.id)
           if (idx !== -1) diaries.value[idx] = r
         } else {
@@ -201,7 +201,7 @@ async function saveItem() {
         break
       case 'timeline':
         if (editingId.value) {
-          const r = await timelineApi.updateEvent(editingId.value, timelineForm.value)
+          const r = await timelineApi.updateEvent(Number(editingId.value), timelineForm.value)
           const idx = events.value.findIndex(x => x.id === r.id)
           if (idx !== -1) events.value[idx] = r
         } else {
@@ -227,15 +227,15 @@ async function deleteItem(section: string, id: string | number) {
   try {
     switch (section) {
       case 'growth':
-        await growthApi.deleteRecord(id)
+        await growthApi.deleteRecord(Number(id))
         records.value = records.value.filter(r => r.id !== id)
         break
       case 'milestone':
-        await milestoneApi.deleteMilestone(id)
+        await milestoneApi.deleteMilestone(Number(id))
         milestones.value = milestones.value.filter(m => m.id !== id)
         break
       case 'vaccine':
-        await vaccineApi.deleteVaccine(id)
+        await vaccineApi.deleteVaccine(Number(id))
         vaccines.value = vaccines.value.filter(v => v.id !== id)
         break
       case 'album':
@@ -243,11 +243,11 @@ async function deleteItem(section: string, id: string | number) {
         albums.value = albums.value.filter(a => a.id !== id)
         break
       case 'diary':
-        await diaryApi.deleteDiary(id)
+        await diaryApi.deleteDiary(Number(id))
         diaries.value = diaries.value.filter(d => d.id !== id)
         break
       case 'timeline':
-        await timelineApi.deleteEvent(id)
+        await timelineApi.deleteEvent(Number(id))
         events.value = events.value.filter(e => e.id !== id)
         break
     }
