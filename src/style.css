@@ -1,0 +1,272 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 设计系统 CSS 变量 */
+:root {
+  --color-pink: #FFB6C1;
+  --color-blue: #A8D8EA;
+  --color-yellow: #FFE5A0;
+  --color-mint: #B5EAD7;
+  --color-lavender: #C7CEEA;
+  --color-warm: #FFF8F0;
+  --color-dark: #5D5A6F;
+  --color-medium: #8B87A0;
+
+  font-family: 'Noto Sans SC', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 全局背景色 */
+body {
+  background-color: var(--color-warm);
+  color: var(--color-dark);
+  min-height: 100vh;
+}
+
+/* 自定义滚动条 - 粉蓝配色 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-warm);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-pink), var(--color-blue));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ff9fb0, #8ec8db);
+}
+
+/* 装饰性云朵 */
+.cloud {
+  position: relative;
+  display: inline-block;
+}
+
+.cloud::before,
+.cloud::after {
+  content: '';
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+}
+
+.cloud::before {
+  width: 40px;
+  height: 40px;
+  top: -20px;
+  left: 10px;
+}
+
+.cloud::after {
+  width: 60px;
+  height: 60px;
+  top: -30px;
+  left: 30px;
+}
+
+.cloud-shape {
+  width: 120px;
+  height: 40px;
+  background: white;
+  border-radius: 40px;
+  position: relative;
+}
+
+.cloud-shape::before {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: white;
+  border-radius: 50%;
+  top: -25px;
+  left: 15px;
+}
+
+.cloud-shape::after {
+  content: '';
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  background: white;
+  border-radius: 50%;
+  top: -40px;
+  left: 40px;
+}
+
+/* 装饰性星星 */
+.star {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  color: var(--color-yellow);
+  text-shadow: 0 0 0 currentColor;
+}
+
+.star::before {
+  content: '★';
+  font-size: inherit;
+}
+
+/* 星星闪烁动画 */
+@keyframes twinkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.star-twinkle {
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+/* 装饰性气球 */
+.balloon {
+  width: 40px;
+  height: 50px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  position: relative;
+  display: inline-block;
+}
+
+.balloon::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 8px solid currentColor;
+}
+
+/* 全局卡片样式 */
+.card {
+  @apply bg-white rounded-2xl shadow-sm p-6 transition-all duration-300;
+  box-shadow: 0 2px 12px rgba(255, 182, 193, 0.15), 0 2px 8px rgba(168, 216, 234, 0.1);
+}
+
+.card:hover {
+  box-shadow: 0 4px 20px rgba(255, 182, 193, 0.25), 0 4px 16px rgba(168, 216, 234, 0.15);
+  transform: translateY(-2px);
+}
+
+/* 弹跳悬停动画 */
+.bounce-hover {
+  @apply transition-all duration-300;
+}
+
+.bounce-hover:hover {
+  animation: bounce 0.5s;
+}
+
+/* 翻转卡片数字样式 */
+.flip-number {
+  @apply inline-flex items-center justify-center bg-white rounded-xl shadow-md font-cute text-4xl md:text-6xl text-baby-dark min-w-[4rem] md:min-w-[5.5rem] h-16 md:h-20;
+  border: 2px solid var(--color-blue);
+}
+
+/* 渐变背景工具类 */
+.gradient-pink {
+  background: linear-gradient(135deg, #FF5577 0%, #FF8FAF 100%);
+  color: #fff !important;
+  font-weight: 600;
+}
+
+.gradient-blue {
+  background: linear-gradient(135deg, #A8D8EA 0%, #C5E8F7 100%);
+}
+
+.gradient-warm {
+  background: linear-gradient(135deg, #FFF8F0 0%, #FFE5A0 100%);
+}
+
+.gradient-mint {
+  background: linear-gradient(135deg, #B5EAD7 0%, #D4F5E9 100%);
+}
+
+.gradient-lavender {
+  background: linear-gradient(135deg, #C7CEEA 0%, #DDDFF0 100%);
+}
+
+/* 骨架屏加载动画 */
+.skeleton {
+  @apply bg-gray-200 rounded-lg animate-pulse;
+}
+
+/* 照片网格悬停效果 */
+.photo-grid-item {
+  @apply overflow-hidden rounded-2xl cursor-pointer transition-all duration-300;
+}
+
+.photo-grid-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 30px rgba(255, 182, 193, 0.3);
+}
+
+.photo-grid-item img {
+  @apply w-full h-full object-cover transition-transform duration-500;
+}
+
+.photo-grid-item:hover img {
+  transform: scale(1.1);
+}
+
+/* 时间轴样式 */
+.timeline-dot {
+  @apply w-4 h-4 rounded-full border-4 border-baby-pink bg-white z-10;
+}
+
+.timeline-line {
+  @apply absolute left-1/2 -translate-x-1/2 w-0.5 bg-gradient-to-b from-baby-pink to-baby-blue;
+}
+
+/* 标签筛选芯片 */
+.filter-chip {
+  @apply px-4 py-1.5 rounded-full text-sm font-medium cursor-pointer transition-all duration-300;
+}
+
+.filter-chip-active {
+  @apply bg-baby-pink text-white shadow-md;
+}
+
+.filter-chip-inactive {
+  @apply bg-white text-baby-medium hover:bg-baby-pink/20;
+}
+
+/* 底部导航栏 */
+.bottom-nav {
+  @apply fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-baby-pink/20 z-50;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 顶部导航栏 */
+.top-nav {
+  @apply bg-white/80 backdrop-blur-md border-b border-baby-pink/20 z-50;
+}
+
+/* 状态徽章 */
+.badge-green {
+  @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-baby-mint text-green-700;
+}
+
+.badge-yellow {
+  @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-baby-yellow text-yellow-700;
+}
+
+.badge-pink {
+  @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-baby-pink text-pink-700;
+}
